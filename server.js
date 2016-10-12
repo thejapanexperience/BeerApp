@@ -8,6 +8,7 @@ const bodyParser = require('body-parser')
 const webpackConfig = require('./webpack.config')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
+const Tweet = require('./models/twitter')
 
 const app = express()
 const compiler = webpack(webpackConfig)
@@ -43,7 +44,11 @@ app.get('/search/:topic',(req,res) => {
   });
 })
 
-
+app.post('/saved',(req,res) => {
+  Tweet.saveTweet(req.body)
+  .then((data) => {res.send(data)})
+  .catch((err) => {res.status(400).send(err)})
+  })
 
 // app.get('/business',(req,res) =>{
 //   let { type,location } = req.query;
@@ -101,6 +106,7 @@ app.get('/search/:topic',(req,res) => {
 app.use("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./build/index.html"));
 });
+
 app.listen(PORT, err => {
   console.log(err || `Express listening on port ${PORT}`);
 })

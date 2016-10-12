@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TwitterStore from '../stores/TwitterStore'
-import List from './List'
+import Lists from './Lists'
 import SearchBar from './SearchBar'
 import { Grid } from 'semantic-ui-react'
 const { Column, Row } = Grid
@@ -33,11 +33,11 @@ export default class SearchPage extends Component {
     console.log("tweets in SearchPage",tweets);
     return (
       <Grid>
-        <Row color='orange' textAlign='right'>
+        <Row color='orange' textAlign='center'>
           <Column><SearchBar/></Column>
         </Row>
-        <Row color='orange' textAlign='center'>
-          <Column><List tweets ={tweets}/></Column>
+        <Row>
+          <Column><Lists tweets ={tweets}/></Column>
         </Row>
       </Grid>
     )

@@ -8,3 +8,7 @@ exports.write = function(newData,cb){
   let json = JSON.stringify(newData);
   fs.writeFile(filename,json,cb);
 }
+
+
+
+// exports.savedTweet = function
