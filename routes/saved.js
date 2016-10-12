@@ -4,7 +4,6 @@ const Tweet = require('../models/twitter')
 
 
 router.post('/',(req,res) => {
-  console.log('in server in app.post')
   Tweet.saveTweet(req.body)
   .then((data) => {res.send(data)})
   .catch((err) => {res.status(400).send(err)})

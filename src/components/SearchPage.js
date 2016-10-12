@@ -30,7 +30,6 @@ export default class SearchPage extends Component {
 
   render(){
     const {tweets} = this.state;
-    console.log("tweets in SearchPage",tweets);
     return (
       <Grid>
         <Row color='orange' textAlign='center'>

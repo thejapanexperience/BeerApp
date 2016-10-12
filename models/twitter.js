@@ -10,7 +10,6 @@ exports.write = function(newData,cb){
 }
 
 exports.saveTweet = (tweet) => new Promise ((res, rej) => {
-  console.log('in savedTweet in twitter.js');
   fs.readFile(filename, (err, buffer) => {
     if (err) return rej(err)
     try {
@@ -19,8 +18,6 @@ exports.saveTweet = (tweet) => new Promise ((res, rej) => {
       var data = []
       return rej('failed')
     }
-    console.log('data: ', data)
-    console.log('tweet: ', tweet)
     data.push(tweet)
     const json = JSON.stringify(data)
     fs.writeFile(filename, json, (err) => {
