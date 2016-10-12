@@ -49,6 +49,19 @@ app.post('/saved',(req,res) => {
   .catch((err) => {res.status(400).send(err)})
   })
 
+app.delete(`/saved/:id`,(req,res) => {
+let {id} = req.params;
+  Tweet.deleted(id)
+  .then((data) => {res.send(data)})
+  .catch((err) => {res.status(400).send(err)})
+  })
+
+  app.get('/saved',(req,res) => {
+     Tweet.getSaved()
+     .then((data) => {res.send(data)})
+     .catch((err) => {res.status(400).send(err)})
+  })
+  
 // app.get('/business',(req,res) =>{
 //   let { type,location } = req.query;
 //   console.log(type,location);

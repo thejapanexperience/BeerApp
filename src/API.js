@@ -1,4 +1,4 @@
-import axios, { get, post, put} from 'axios';
+import axios, { get, post, put } from 'axios';
 import ServerActions from './actions/ServerActions';
 
 
@@ -18,6 +18,22 @@ const API ={
     .then( res => {
       console.log('in API after post');
       console.log('res.data: ', res.data)
+      ServerActions.gotSaved(res.data)
+    })
+    .catch(console.error)
+  },
+
+  deleteTweet(id){
+    axios.delete(`/saved/${id}`)
+    .then( res => {
+      ServerActions.gotSaved(res.data)
+    })
+    .catch(console.error)
+  },
+
+  getSaved(){
+    get('/saved')
+    .then( res => {
       ServerActions.gotSaved(res.data)
     })
     .catch(console.error)
