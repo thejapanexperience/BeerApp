@@ -4,7 +4,7 @@ import ServerActions from './actions/ServerActions';
 
 const API ={
   twitterSearch(topic){
-    get(`/search/${topic}`)
+    get(`/api/search/${topic}`)
     .then( res => {
       ServerActions.gotTweets(res.data)
     })
@@ -14,7 +14,7 @@ const API ={
   save(tweet){
     console.log('in save in API before post');
     console.log('tweet: ', tweet)
-    post('/saved',{tweet})
+    post('/api/saved',{tweet})
     .then( res => {
       console.log('in API after post');
       console.log('res.data: ', res.data)
@@ -24,7 +24,7 @@ const API ={
   },
 
   deleteTweet(id){
-    axios.delete(`/saved/${id}`)
+    axios.delete(`/api/saved/${id}`)
     .then( res => {
       ServerActions.gotSaved(res.data)
     })
@@ -32,7 +32,7 @@ const API ={
   },
 
   getSaved(){
-    get('/saved')
+    get('/api/saved')
     .then( res => {
       ServerActions.gotSaved(res.data)
     })
