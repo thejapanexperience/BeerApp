@@ -6,6 +6,7 @@ const ToAPIActions = {
     API.twitterSearch(topic)
   },
   save(tweet) {
+    console.log('in ToAPIActions')
     API.save(tweet)
   }
 }

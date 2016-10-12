@@ -10,6 +10,8 @@ export default class Lists extends Component {
   }
 
  _like(tweet){
+   console.log('in _like in Lists');
+   console.log('tweet: ', tweet)
   ToAPIActions.save(tweet);
  }
 

@@ -3,6 +3,7 @@ import AppDispatcher from '../AppDispatcher'
 import Storage from '../Storage'
 
 let _tweets = [];
+let _saved = [];
 
 class TwitterStore extends EventEmitter {
   constructor(){
@@ -13,6 +14,13 @@ class TwitterStore extends EventEmitter {
         _tweets = action.payload.tweets;
         console.log('in store');
         console.log('_tweets: ', _tweets)
+        this.emit('CHANGE');
+        break;
+
+        case 'GOT_SAVED':
+        _saved = action.payload.saved;
+        console.log('in store');
+        console.log('_saved: ', _saved)
         this.emit('CHANGE');
         break;
       }
@@ -29,6 +37,10 @@ class TwitterStore extends EventEmitter {
 
   getTweets(){
     return _tweets;
+  }
+
+  getSaved(){
+    return _saved;
   }
 
 }

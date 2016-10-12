@@ -12,8 +12,12 @@ const API ={
   },
 
   save(tweet){
+    console.log('in save in API before post');
+    console.log('tweet: ', tweet)
     post('/saved',{tweet})
     .then( res => {
+      console.log('in API after post');
+      console.log('res.data: ', res.data)
       ServerActions.gotSaved(res.data)
     })
     .catch(console.error)

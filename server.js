@@ -34,10 +34,8 @@ const client = new Twitter({
 
 app.get('/search/:topic',(req,res) => {
   let {topic} = req.params;
-  console.log('in server');
-  console.log('topic: ', topic)
+  console.log('in server app.get');
   client.get('search/tweets', {q: `${topic}`}, function(error, tweets, response) {
-     console.log("tweet",tweets.statuses);
     //  console.log("response",response);
      if (error) return res.status(400).send(error);
      res.send(tweets.statuses);
@@ -45,6 +43,7 @@ app.get('/search/:topic',(req,res) => {
 })
 
 app.post('/saved',(req,res) => {
+  console.log('in server in app.post')
   Tweet.saveTweet(req.body)
   .then((data) => {res.send(data)})
   .catch((err) => {res.status(400).send(err)})
