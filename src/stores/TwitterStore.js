@@ -12,15 +12,11 @@ class TwitterStore extends EventEmitter {
       switch(action.type) {
         case 'GOT_TWEETS':
         _tweets = action.payload.tweets;
-        console.log('in store');
-        console.log('_tweets: ', _tweets)
         this.emit('CHANGE');
         break;
 
         case 'GOT_SAVED':
         _saved = action.payload.saved;
-        console.log('in store');
-        console.log('_saved: ', _saved)
         this.emit('CHANGE');
         break;
       }

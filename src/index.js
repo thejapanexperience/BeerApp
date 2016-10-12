@@ -10,7 +10,6 @@ import SaveFavPage from './components/SaveFavPage'
 render(
   <Router history ={browserHistory}>
     <Route path ='/' component ={Layout}>
-      {/* <IndexRoute component={Home}/> */}
       <Route path ='/saved' component ={SaveFavPage}/>
       <Route path ='/search' component={SearchPage}/>
     </Route>

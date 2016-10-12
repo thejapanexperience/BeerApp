@@ -11,7 +11,6 @@ export default class SearchBar extends Component {
     e.preventDefault();
     let {input} = this.refs;
     let topic  = input.value;
-    console.log('in form submit')
     input.value ='';
     ToAPIActions.search(topic);
   }
