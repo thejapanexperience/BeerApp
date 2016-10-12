@@ -1,4 +1,4 @@
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 const path = require('path')
 const morgan = require('morgan')
 const express = require('express')
