@@ -1,13 +1,17 @@
-import AppDispatcher from '../AppDispatcher'
+// jshint esversion:6
+
+import AppDispatcher from '../AppDispatcher';
 
 const ServerActions ={
-  gotTweets(tweets){
+  gotBeer(beer){
+    console.log('in ServerActions');
+    console.log('beer: ', beer)
     AppDispatcher.dispatch({
-      type:'GOT_TWEETS',
-      payload:{tweets}
-    })
+      type:'GOT_BEER',
+      payload:{beer}
+    });
   },
-  
+
   gotSaved(saved){
     AppDispatcher.dispatch({
       type:'GOT_SAVED',

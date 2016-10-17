@@ -1,5 +1,7 @@
+// jshint esversion:6
+
 import React, { Component } from 'react'
-import TwitterStore from '../stores/TwitterStore'
+import BeerStore from '../stores/BeerStore'
 import Lists from './Lists'
 import SearchBar from './SearchBar'
 import { Grid } from 'semantic-ui-react'
@@ -10,33 +12,33 @@ export default class SearchPage extends Component {
     super();
 
     this.state = {
-      tweets: TwitterStore.getTweets()
+      beer: BeerStore.getBeer()
     }
     this._onChange = this._onChange.bind(this);
   }
   componentWillMount() {
-    TwitterStore.startListening(this._onChange)
+    BeerStore.startListening(this._onChange)
   }
 
   componentWillUnmount(){
-    TwitterStore.stopListening(this._onChange)
+    BeerStore.stopListening(this._onChange)
   }
 
   _onChange(){
     this.setState({
-      tweets: TwitterStore.getTweets()
+      beer: BeerStore.getBeer()
     })
   }
 
   render(){
-    const {tweets} = this.state;
+    const {beer} = this.state;
     return (
       <Grid>
         <Row color='orange' textAlign='center'>
           <Column><SearchBar/></Column>
         </Row>
         <Row>
-          <Column><Lists tweets ={tweets}/></Column>
+          <Column><Lists beer ={beer}/></Column>
         </Row>
       </Grid>
     )

@@ -1,19 +1,13 @@
-import API from '../API'
+// jshint esversion:6
+
+import API from '../API';
 
 const ToAPIActions = {
-  search(topic) {
-    API.twitterSearch(topic)
-  },
-  save(tweet) {
-    API.save(tweet)
-  },
-  deleteTweet(id) {
-    API.deleteTweet(id)
-  },
-  getSaved(){
-    API.getSaved()
-  }
 
-}
+  getRandomBeer: API.getRandomBeer,
+  save: API.save,
+  getSaved: API.getSaved,
+  delete: API.delete,
+};
 
 export default ToAPIActions;

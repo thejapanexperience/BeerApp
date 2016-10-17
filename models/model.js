@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const filename = path.join(__dirname,'../data/twitterList.json');
+const filename = path.join(__dirname,'../data/beerList.json');
 const uuid = require('uuid');
 
 
@@ -9,7 +9,7 @@ exports.write = function(newData,cb){
   fs.writeFile(filename,json,cb);
 }
 
-exports.saveTweet = (tweet) => new Promise ((res, rej) => {
+exports.save = (beer) => new Promise ((res, rej) => {
   fs.readFile(filename, (err, buffer) => {
     if (err) return rej(err)
     try {
@@ -18,7 +18,7 @@ exports.saveTweet = (tweet) => new Promise ((res, rej) => {
       var data = []
       return rej('failed')
     }
-    data.push(tweet)
+    data.push(beer)
     const json = JSON.stringify(data)
     fs.writeFile(filename, json, (err) => {
       if (err) throw err
@@ -37,7 +37,7 @@ exports.deleted = (id) => new Promise ((res, rej) => {
       return rej('failed')
     }
     let NewData =data.filter( d => {
-      return d.tweet.id != id})
+      return d.beer.id != id})
     const json = JSON.stringify(NewData)
     fs.writeFile(filename, json, (err) => {
       if (err) throw err

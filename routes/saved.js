@@ -1,23 +1,23 @@
 const express = require('express')
 const router = express.Router()
-const Tweet = require('../models/twitter')
+const Model = require('../models/model')
 
 
 router.post('/',(req,res) => {
-  Tweet.saveTweet(req.body)
+  Model.save(req.body)
   .then((data) => {res.send(data)})
   .catch((err) => {res.status(400).send(err)})
 })
 
 router.delete(`/:id`,(req,res) => {
   let {id} = req.params;
-  Tweet.deleted(id)
+  Model.deleted(id)
   .then((data) => {res.send(data)})
   .catch((err) => {res.status(400).send(err)})
 })
 
 router.get('/',(req,res) => {
-  Tweet.getSaved()
+  Model.getSaved()
   .then((data) => {res.send(data)})
   .catch((err) => {res.status(400).send(err)})
 })

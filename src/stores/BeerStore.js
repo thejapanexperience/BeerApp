@@ -1,22 +1,25 @@
+// jshint esversion:6
+
 import { EventEmitter } from 'events'
 import AppDispatcher from '../AppDispatcher'
 import Storage from '../Storage'
 
-let _tweets = [];
-let _saved = [];
+let _beer;
+let _saved;
 
-class TwitterStore extends EventEmitter {
+class BeerStore extends EventEmitter {
   constructor(){
     super();
     AppDispatcher.register(action => {
       switch(action.type) {
-        case 'GOT_TWEETS':
-        _tweets = action.payload.tweets;
+        case 'GOT_BEER':
+        _beer = action.payload.beer;
         this.emit('CHANGE');
         break;
 
         case 'GOT_SAVED':
         _saved = action.payload.saved;
+        console.log('_saved: ', _saved)
         this.emit('CHANGE');
         break;
       }
@@ -31,8 +34,8 @@ class TwitterStore extends EventEmitter {
     this.removeListener('CHANGE',cb)
   }
 
-  getTweets(){
-    return _tweets;
+  getBeer(){
+    return _beer;
   }
 
   getSaved(){
@@ -41,4 +44,4 @@ class TwitterStore extends EventEmitter {
 
 }
 
-export default new TwitterStore();
+export default new BeerStore();

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TwitterStore from '../stores/TwitterStore'
+import BeerStore from '../stores/BeerStore'
 import Lists from './Lists'
 import SearchBar from './SearchBar'
 import ToAPIActions from '../actions/ToAPIActions'
@@ -12,28 +12,29 @@ export default class SaveFavPage extends Component {
     super();
 
     this.state = {
-      saved: TwitterStore.getSaved(),
-      bool: false
+      saved: BeerStore.getSaved(),
     }
     this._onChange = this._onChange.bind(this);
     this._getAllSaved = this._getAllSaved.bind(this);
+    this._delete = this._delete.bind(this);
   }
   componentWillMount() {
-    TwitterStore.startListening(this._onChange)
+    BeerStore.startListening(this._onChange)
+    this._getAllSaved()
   }
 
   componentWillUnmount(){
-    TwitterStore.stopListening(this._onChange)
+    BeerStore.stopListening(this._onChange)
   }
 
   _onChange(){
     this.setState({
-      saved: TwitterStore.getSaved()
+      saved: BeerStore.getSaved()
     })
   }
 
   _delete(id){
-    ToAPIActions.deleteTweet(id)
+    ToAPIActions.delete(id)
   }
 
   _getAllSaved(){
@@ -44,43 +45,49 @@ export default class SaveFavPage extends Component {
   }
 
   render(){
-    const {saved,bool} = this.state;
-    if(!bool){
-      this._getAllSaved()
-    }
-    {if(saved){
-   return (
-     <Card.Group>
-       {saved.map( save => {
-         let {created_at, id, text} = save.tweet;
-         let image = save.tweet.user.profile_image_url;
-         let name = save.tweet.user.name;
+
+  let {saved} = this.state
+
+  if(!saved){
+      console.log('no saved')
+      return(
+        <div className="container">
+          <h1>no beer</h1>
+        </div>
+      )
+
+ } else {
+   console.log('saved: ', saved)
+     return (
+       <Card.Group>
+         {saved.map( save => {
+           let name = save.beer.nameDisplay
+           let description = save.beer.description
+           let comment = save.beer.comment
            return (
-               <Card key ={id}>
-                 <Card.Content>
-                   <Image floated='right' size='mini' src={image} />
-                   <Card.Header>
-                     {name}
-                   </Card.Header>
-                   <Card.Meta>
-                     {created_at}
-                   </Card.Meta>
-                   <Card.Description>
-                     {text}
-                   </Card.Description>
-                 </Card.Content>
-                 <Card.Content extra>
-                   <div className='ui two buttons'>
-                     <Button basic color='green'>Saved</Button>
-                     <div onClick = {this._delete.bind(null,id)}><Button basic color='red'>Unsave</Button></div>
-                   </div>
-                 </Card.Content>
-               </Card>
-         )
-       })}
-     </Card.Group>
-   )
+             <Card key ={save.beer.id}>
+               <Card.Content>
+                 <Card.Header>
+                   {name}
+                 </Card.Header>
+                 <Card.Header>
+                   My Comment: {comment}
+                 </Card.Header>
+                 <Card.Description>
+                   {description}
+                 </Card.Description>
+               </Card.Content>
+               <Card.Content extra>
+                 <div className='ui two buttons'>
+                   <Button basic color='green'>Saved</Button>
+                   <div onClick = {this._delete.bind(null,save.beer.id)}><Button basic color='red'>Unsave</Button></div>
+                     </div>
+                   </Card.Content>
+                 </Card>
+           )
+         })}
+       </Card.Group>
+     )
  }
 }
-  }
 }
