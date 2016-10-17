@@ -1,10 +1,7 @@
-#TWITTER API
+#BEER API
 
-##Link to Heroku
-https://shrouded-eyrie-47823.herokuapp.com/
-
-##Made by Sammi and Richard
+##Made by  Richard
 
 ---
 
-Use of React-Router, Heroku, Flux, Express, React and SemanticUI.
+Use of React-Router, Flux, Express, React and SemanticUI.
